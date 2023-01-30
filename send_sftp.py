@@ -2,11 +2,13 @@ import argparse
 import pysftp
 
 ALEGRIA_PATH_FOLDER = "/public_html/alegriacrista"
+HOST_PORT = 22
 
 def main(params):
-    srv = pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'])
-    with srv.cd(ALEGRIA_PATH_FOLDER):
-        srv.put(params['zip_file'])
+    srv = pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT)
+    srv.listdir(ALEGRIA_PATH_FOLDER)
+    # with srv.cd(ALEGRIA_PATH_FOLDER):
+        # srv.put(params['zip_file'])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Parametros para execução do dataflow stream')
