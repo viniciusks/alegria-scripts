@@ -7,7 +7,7 @@ HOST_PORT = 22
 def main(params):
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
-    with pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT, cnopts=cnopts) as sftp:
+    with pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT, cnopts=cnopts, log="./log_script.log") as sftp:
         sftp.cwd("ls -lah")
     # with srv.cd(ALEGRIA_PATH_FOLDER):
         # srv.put(params['zip_file'])
