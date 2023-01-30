@@ -1,7 +1,7 @@
 import argparse
 import pysftp
 
-ALEGRIA_PATH_FOLDER = "/public_html/alegriacrista"
+ALEGRIA_PATH_FOLDER = "/home/storage/c/93/dd/concafras1/public_html/alegriacrista"
 HOST_PORT = 22
 
 def main(params):
