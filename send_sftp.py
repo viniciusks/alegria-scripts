@@ -8,9 +8,8 @@ def main(params):
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
     with pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT, cnopts=cnopts, log="./log_script.log") as sftp:
-        sftp.cwd("ls -lah")
-    # with srv.cd(ALEGRIA_PATH_FOLDER):
-        # srv.put(params['zip_file'])
+        with sftp.cd(ALEGRIA_PATH_FOLDER):
+            sftp.put(params['zip_file'])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Parametros para execução do dataflow stream')
