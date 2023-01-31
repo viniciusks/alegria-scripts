@@ -13,7 +13,7 @@ def main(params):
         # Dentro da pasta da Alegria Cristã
         with sftp.cd(ALEGRIA_PATH_FOLDER):
             sftp.put(params['zip_file'])
-            sftp.execute("ls -lah")
+            # sftp.execute("ls -lah")
         # Encerrando conexão
         sftp.close()
 
