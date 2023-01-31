@@ -1,10 +1,24 @@
 import argparse
 import pysftp
+import os
 
 ALEGRIA_PATH_FOLDER = "/home/storage/c/93/dd/concafras1/public_html/alegriacrista"
 HOST_PORT = 22
 
+def unzip_file(zip_file):
+    os.system("pwd")
+    os.system("mkdir dist")
+    os.system(f"unzip {zip_file} dist/")
+    os.system("ls -lah")
+    dirlist = os.listdir("dist/")
+    files = []
+    for i in dirlist:
+        files.append(os.path.abspath(i))
+    return files
+
+
 def main(params):
+    files = unzip_file()
     # Configurações necessárias para não verificar as chaves SSH's
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
@@ -17,6 +31,7 @@ def main(params):
             # sftp.execute("ls -lah")
         # Encerrando conexão
         sftp.close()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Parametros para execução do dataflow stream')
