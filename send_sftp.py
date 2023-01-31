@@ -18,7 +18,8 @@ def unzip_file(zip_file):
 
 
 def main(params):
-    files = unzip_file()
+    files = unzip_file(params['zip_file'])
+    print(files)
     # Configurações necessárias para não verificar as chaves SSH's
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
