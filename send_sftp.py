@@ -1,6 +1,7 @@
 import argparse
 import pysftp
 import os
+import datetime
 
 ALEGRIA_PATH_FOLDER = "/home/storage/c/93/dd/concafras1/public_html/alegriacrista"
 HOST_PORT = 22
@@ -11,7 +12,12 @@ def set_new_version(file):
         lines = file.readlines()
         for line in lines:
             if "ALTERAR_VERSAO_ALEGRIA_FRONT" in line:
+                date = datetime.datetime.now()
                 print(f"LINHA: {line}")
+                replaced_line = line.replace("ALTERAR_VERSAO_ALEGRIA_FRONT", f"{date.day}/{date.month}/{date.year}")
+                line = replaced_line
+        file.writelines(lines)
+        file.close()
 
 
 def main(params):
