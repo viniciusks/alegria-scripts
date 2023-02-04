@@ -12,7 +12,7 @@ def main(params):
     # Início da conexão com o servidor da CONCAFRAS
     with pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT, cnopts=cnopts, log="./log_script.log") as sftp:
         # Dentro da pasta da Alegria Cristã
-        if "assets/css/pages-styles" in params['file-path']:
+        if "assets/css/pages-styles" in params['file_path']:
              print("ENTROU EM ASSETS/CSS/PAGES-STYLES")
              with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/css/pages-styles"):
                 sftp.put(params['file_path'])
