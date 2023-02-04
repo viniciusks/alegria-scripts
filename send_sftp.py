@@ -20,10 +20,26 @@ def main(params):
             print("ENTROU EM ASSETS/CSS")
             with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/css"):
                 sftp.put(params['file_path'])
-
-        # with sftp.cd(ALEGRIA_PATH_FOLDER):
-        #     sftp.put(params['file_path'])
-        #     print(sftp.listdir())
+        elif "assets/img/logo" in params['file_path']:
+            print("ENTROU EM ASSETS/IMG/LOGO")
+            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/img/logo"):
+                sftp.put(params['file_path'])
+        elif "assets/img" in params['file_path']:
+            print("ENTROU EM ASSETS/IMG")
+            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/img"):
+                sftp.put(params['file_path'])
+        elif "assets/js" in params['file_path']:
+            print("ENTROU EM ASSETS/JS")
+            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/js"):
+                sftp.put(params['file_path'])
+        elif "pages" in params['file_path']:
+            print("ENTROU EM PAGES")
+            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/pages"):
+                sftp.put(params['file_path'])
+        else:
+            print("ENTROU NA RAIZ")
+            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
+                sftp.put(params['file_path'])
 
         # Encerrando conexão
         sftp.close()
