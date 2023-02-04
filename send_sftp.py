@@ -19,7 +19,7 @@ def main(params):
                         if("page-styles" in params['file_path']):
                             sftp.put(params['file_path'])
                         sftp.put(params['file_path'])
-            sftp.put(params['file_path'])
+            # sftp.put(params['file_path'])
             print(sftp.listdir())
             # sftp.execute("ls -lah")
         # Encerrando conexão
