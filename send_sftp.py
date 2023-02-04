@@ -5,7 +5,19 @@ import os
 ALEGRIA_PATH_FOLDER = "/home/storage/c/93/dd/concafras1/public_html/alegriacrista"
 HOST_PORT = 22
 
+
+def set_new_version(file):
+    with open(file, 'r+') as file:
+        lines = file.readlines()
+        for line in lines:
+            if "ALTERAR_VERSAO_ALEGRIA_FRONT" in line:
+                print(f"LINHA: {line}")
+
+
 def main(params):
+    if "index.html" in params['file_path']:
+        set_new_version(params['file_path'])
+
     # Configurações necessárias para não verificar as chaves SSH's
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
