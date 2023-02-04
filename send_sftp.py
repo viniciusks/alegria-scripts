@@ -13,6 +13,10 @@ def main(params):
     with pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT, cnopts=cnopts, log="./log_script.log") as sftp:
         # Dentro da pasta da Alegria Cristã
         with sftp.cd(ALEGRIA_PATH_FOLDER):
+            if("assets" in params['file_path']):
+                with sftp.cd("assets"):
+                    if("css" in params['file_path']):
+                        sftp.put(params['file_path'])
             sftp.put(params['file_path'])
             print(sftp.listdir())
             # sftp.execute("ls -lah")
