@@ -16,6 +16,8 @@ def main(params):
             if("assets" in params['file_path']):
                 with sftp.cd("assets"):
                     if("css" in params['file_path']):
+                        if("page-styles" in params['file_path']):
+                            sftp.put(params['file_path'])
                         sftp.put(params['file_path'])
             sftp.put(params['file_path'])
             print(sftp.listdir())
