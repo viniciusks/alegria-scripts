@@ -14,7 +14,7 @@ def set_new_version(file):
             if "ALTERAR_VERSAO_ALEGRIA_FRONT" in line:
                 date = datetime.datetime.now()
                 print(f"LINHA: {line}")
-                replaced_line = line.replace("ALTERAR_VERSAO_ALEGRIA_FRONT", f"{date.day}/{date.month}/{date.year}")
+                replaced_line = line.replace("ALTERAR_VERSAO_ALEGRIA_FRONT", f"{date.strftime('%d/%m/%Y, %H:%M:%S')}")
                 line = replaced_line
         file.writelines(lines)
         file.close()
