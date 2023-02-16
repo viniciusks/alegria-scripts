@@ -31,10 +31,12 @@ def main(params):
                     print("ENTROU NA RAIZ")
                     with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
                         sftp.put(params['file_path'])
+                        break
                 else:
                     print(f"ENTROU EM {path.upper()}")
                     with sftp.cd(f"{path}"):
                         sftp.put(params['file_path'])
+                        break
             else:
                 print("Não faz nada.")
 
