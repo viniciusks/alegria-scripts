@@ -9,7 +9,11 @@ FOLDERS_TO_DEPLOY = [
     "assets/img/logo",
     "assets/img",
     "assets/js",
-    "pages"
+    "pages",
+    "index.html"
+]
+FILES = [
+    "index.html"
 ]
 
 
@@ -23,13 +27,16 @@ def main(params):
             path = f"{ALEGRIA_PATH_FOLDER}{folder}"
             # Dentro da pasta da Alegria Cristã
             if folder in params['file_path']:
-                print(f"ENTROU EM {path}")
-                with sftp.cd(f"{path}"):
-                    sftp.put(params['file_path'])
+                if folder in FILES:
+                    print("ENTROU NA RAIZ")
+                    with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
+                        sftp.put(params['file_path'])
+                else:
+                    print(f"ENTROU EM {path.upper()}")
+                    with sftp.cd(f"{path}"):
+                        sftp.put(params['file_path'])
             else:
-                print("ENTROU NA RAIZ")
-                with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
-                    sftp.put(params['file_path'])
+                print("Não faz nada.")
 
         # Encerrando conexão
         sftp.close()
