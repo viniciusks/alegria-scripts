@@ -11,6 +11,7 @@ DATAS_TO_DEPLOY = {
         "/assets/img",
         "/assets/js",
         "/pages",
+        "favicon.ico",
         "index.html"
     ],
     "audio-player": [
@@ -29,19 +30,19 @@ def main(params):
     with pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT, cnopts=cnopts, log="./log_script.log") as sftp:
         # Dentro da pasta da Alegria Cristã
         for data in DATAS_TO_DEPLOY[data_type]:
-            if "/" in data:
-                if data in params["file_path"]:
+            if data in params["file_path"]:
+                if "/" in data:
                     print("ENTROU NA BARRA")
                     print(data)
                     with sftp.cd(f"{ALEGRIA_PATH_FOLDER}{data}"):
                         sftp.put(params['file_path'])
                     break
-            elif not "/" in data:
-                print("ENTROU NO SEM BARRA")
-                print(data)
-                with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
-                    sftp.put(params['file_path'])
-                break
+                elif not "/" in data:
+                    print("ENTROU NO SEM BARRA")
+                    print(data)
+                    with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
+                        sftp.put(params['file_path'])
+                    break
         # Encerrando conexão
         sftp.close()
 
