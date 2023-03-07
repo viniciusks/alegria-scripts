@@ -27,9 +27,10 @@ def main(params):
 
     for data in DATAS_TO_DEPLOY[data_type]:
         if "/" in data:
-            print("ENTROU NA BARRA")
-            print(data)
-            break
+            if data in params["file_path"]:
+                print("ENTROU NA BARRA")
+                print(data)
+                break
         elif not "/" in data:
             print("ENTROU NO SEM BARRA")
             print(data)
