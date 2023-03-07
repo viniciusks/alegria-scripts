@@ -6,12 +6,12 @@ HOST_PORT = 22
 DATAS_TO_DEPLOY = {
     "site": [
         "/assets/css/pages-styles",
-        "/assets/css",
-        "/assets/img/logo",
-        "/assets/img",
-        "/assets/js",
-        "/pages",
-        "index.html"
+        # "/assets/css",
+        # "/assets/img/logo",
+        # "/assets/img",
+        # "/assets/js",
+        # "/pages",
+        # "index.html"
     ],
     "audio-player": [
         "index.html"
@@ -23,49 +23,54 @@ def main(params):
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
 
-    data_type = "site"
+    data_type = params["type"]
 
-    for data in DATAS_TO_DEPLOY[data_type]:
-        if "/" in data:
-            if data in params["file_path"]:
-                print("ENTROU NA BARRA")
-                print(data)
-                break
-        elif not "/" in data:
-            print("ENTROU NO SEM BARRA")
-            print(data)
-            break
     # Início da conexão com o servidor da CONCAFRAS
     with pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT, cnopts=cnopts, log="./log_script.log") as sftp:
+        for data in DATAS_TO_DEPLOY[data_type]:
+            if "/" in data:
+                if data in params["file_path"]:
+                    print("ENTROU NA BARRA")
+                    print(data)
+                    with sftp.cd(f"{ALEGRIA_PATH_FOLDER}{data}"):
+                        sftp.put(params['file_path'])
+                    break
+            elif not "/" in data:
+                print("ENTROU NO SEM BARRA")
+                print(data)
+                with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
+                    sftp.put(params['file_path'])
+                break
+        
         # Dentro da pasta da Alegria Cristã
-        if "assets/css/pages-styles" in params['file_path']:
-             print("ENTROU EM ASSETS/CSS/PAGES-STYLES")
-             with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/css/pages-styles"):
-                sftp.put(params['file_path'])
-        elif "assets/css" in params['file_path']:
-            print("ENTROU EM ASSETS/CSS")
-            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/css"):
-                sftp.put(params['file_path'])
-        elif "assets/img/logo" in params['file_path']:
-            print("ENTROU EM ASSETS/IMG/LOGO")
-            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/img/logo"):
-                sftp.put(params['file_path'])
-        elif "assets/img" in params['file_path']:
-            print("ENTROU EM ASSETS/IMG")
-            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/img"):
-                sftp.put(params['file_path'])
-        elif "assets/js" in params['file_path']:
-            print("ENTROU EM ASSETS/JS")
-            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/js"):
-                sftp.put(params['file_path'])
-        elif "pages" in params['file_path']:
-            print("ENTROU EM PAGES")
-            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/pages"):
-                sftp.put(params['file_path'])
-        else:
-            print("ENTROU NA RAIZ")
-            with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
-                sftp.put(params['file_path'])
+        # if "assets/css/pages-styles" in params['file_path']:
+        #      print("ENTROU EM ASSETS/CSS/PAGES-STYLES")
+        #      with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/css/pages-styles"):
+        #         sftp.put(params['file_path'])
+        # elif "assets/css" in params['file_path']:
+        #     print("ENTROU EM ASSETS/CSS")
+        #     with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/css"):
+        #         sftp.put(params['file_path'])
+        # elif "assets/img/logo" in params['file_path']:
+        #     print("ENTROU EM ASSETS/IMG/LOGO")
+        #     with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/img/logo"):
+        #         sftp.put(params['file_path'])
+        # elif "assets/img" in params['file_path']:
+        #     print("ENTROU EM ASSETS/IMG")
+        #     with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/img"):
+        #         sftp.put(params['file_path'])
+        # elif "assets/js" in params['file_path']:
+        #     print("ENTROU EM ASSETS/JS")
+        #     with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/assets/js"):
+        #         sftp.put(params['file_path'])
+        # elif "pages" in params['file_path']:
+        #     print("ENTROU EM PAGES")
+        #     with sftp.cd(f"{ALEGRIA_PATH_FOLDER}/pages"):
+        #         sftp.put(params['file_path'])
+        # else:
+        #     print("ENTROU NA RAIZ")
+        #     with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
+        #         sftp.put(params['file_path'])
 
         # Encerrando conexão
         sftp.close()
