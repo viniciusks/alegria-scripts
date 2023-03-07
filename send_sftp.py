@@ -82,6 +82,7 @@ if __name__ == "__main__":
     parser.add_argument('user', help='Usuário para realizar a conexão.')
     parser.add_argument('pass', help='Senha para realizar a conexão.')
     parser.add_argument('file_path', help='Arquivo que deve ser transferido.')
+    parser.add_argument('type', help='Tipo da aplicação.')
     params = vars(parser.parse_args())
 
     main(params)
