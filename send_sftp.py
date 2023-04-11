@@ -25,6 +25,7 @@ def main(params):
     cnopts.hostkeys = None
 
     data_type = params["type"]
+    path_type = "" if params["type"] == "site" else "/player"
 
     # Início da conexão com o servidor da CONCAFRAS
     with pysftp.Connection(host=params['host'], username=params['user'], password=params['pass'], port=HOST_PORT, cnopts=cnopts, log="./log_script.log") as sftp:
@@ -34,13 +35,13 @@ def main(params):
                 if "/" in data:
                     print("ENTROU NA BARRA")
                     print(data)
-                    with sftp.cd(f"{ALEGRIA_PATH_FOLDER}{data}"):
+                    with sftp.cd(f"{ALEGRIA_PATH_FOLDER}{path_type}{data}"):
                         sftp.put(params['file_path'])
                     break
                 elif not "/" in data:
                     print("ENTROU NO SEM BARRA")
                     print(data)
-                    with sftp.cd(f"{ALEGRIA_PATH_FOLDER}"):
+                    with sftp.cd(f"{ALEGRIA_PATH_FOLDER}{path_type}"):
                         sftp.put(params['file_path'])
                     break
         # Encerrando conexão
