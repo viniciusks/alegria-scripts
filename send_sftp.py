@@ -15,6 +15,10 @@ DATAS_TO_DEPLOY = {
         "index.html"
     ],
     "audio-player": [
+        "/assets/css",
+        "/assets/img",
+        "/assets/js",
+        "favicon.ico",
         "index.html"
     ]
 }
